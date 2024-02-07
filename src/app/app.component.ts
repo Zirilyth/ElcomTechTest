@@ -13,3 +13,6 @@ import { TableComponent } from './Components/table/table.component';
 export class AppComponent {
   title = 'Elcom Tech Test';
 }
+
+
+
