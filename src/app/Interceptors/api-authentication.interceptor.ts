@@ -7,10 +7,11 @@ export class apiAuthenticationInterceptor implements HttpInterceptor {
 
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const userToken = '***REMOVED***'; const modifiedReq = req.clone({
+		const userToken = '***REMOVED***';
+		const modifiedReq = req.clone({
 			headers: req.headers
 				.set('api_key', `${userToken}`)
-				.set('Access-Control-Allow-Origin','*'),
+				.set('Access-Control-Allow-Origin', '*'),
 		});
 		return next.handle(modifiedReq);
 	}

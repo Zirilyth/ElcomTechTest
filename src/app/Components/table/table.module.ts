@@ -4,13 +4,13 @@ import { TableComponent } from './table.component';
 import { EditProductComponent } from '../modal/edit-product/edit-product.component';
 
 
-
 @NgModule({
-  declarations: [TableComponent],
+	declarations: [TableComponent],
 	imports: [
 		CommonModule,
 		EditProductComponent
 	],
-  exports:[TableComponent]
+	exports: [TableComponent]
 })
-export class TableModule { }
+export class TableModule {
+}
