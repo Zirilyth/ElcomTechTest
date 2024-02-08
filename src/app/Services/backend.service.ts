@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,31 +14,37 @@ export class BackendService {
 
 	public getProducts() {
 		return this.http.get<Product[]>('/CRUDExample/get-products').pipe(
-			catchError(this.handleAPIError<Product[]>('getProducts'))
+			catchError(this.handleAPIError<Product[]>('Get Products'))
 		);
 	}
 
-	public editProduct(product:Product){
-		console.log(product)
+	public editProduct(product: Product) {
+		console.log(product);
 		return this.http.put<Product[]>(
 			'/CRUDExample/edit-product',
 			{...product},
-			{headers:{'content-type':'application/json'}}
+			{headers: {'content-type': 'application/json'}}
 		).pipe(
-			catchError(this.handleAPIError<Product[]>('edit product'))
+			catchError(this.handleAPIError<Product[]>('Editing Product'))
+		);
+	}
 
+	public deleteProduct(productUid: number) {
+		return this.http.delete('/CRUDExample/remove-product',
+			{
+				params: {'ProductUId': productUid}
+			}
+		).pipe(
+			catchError(this.handleAPIError('Deleting Product'))
 		);
 	}
 
 
-
-
-
-	private handleAPIError<T>(operation = 'operation',result?: T){
+	private handleAPIError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
-			console.error(operation,': ',error)
+			console.error(operation, ': ', error);
 			return of(result as T);
-		}
+		};
 	}
 }
 
