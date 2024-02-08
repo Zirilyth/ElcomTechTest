@@ -1,14 +1,39 @@
-<table class="table table-striped">
-  <thead>
-    <th scope="col">Product</th>
-    <th scope="col">Quantity</th>
-  </thead>
-  <tbody>
-    <tr>
-    </tr>
-    <tr>
-      <td>THING</td>
-      <td>444</td>
-    </tr>
-  </tbody>
-</table>
+<div class="card p-4 m-5 rounded-5 shadow-lg">
+	<table class="table table-striped">
+		<thead>
+		<th scope="col">Available</th>
+		<th scope="col">Carton Quantity</th>
+		<th scope="col">Manufacture Code</th>
+		<th scope="col">Manufacture Description</th>
+		<th scope="col">Manufacture Name</th>
+		<th scope="col">Product Code</th>
+		<th scope="col">Product Description</th>
+		<th scope="col">Product Name</th>
+		<th scope="col">Product UID</th>
+		<th scope="col"></th>
+		</thead>
+		<tbody>
+		<tr *ngFor="let product of products; index as i; trackBy: trackProductBy">
+			<td>{{ product.available }}</td>
+			<td>{{ product.cartonQty }}</td>
+			<td>{{ product.manufactureCode }}</td>
+			<td>{{ product.manufactureDescription }}</td>
+			<td>{{ product.manufactureName }}</td>
+			<td>{{ product.productCode }}</td>
+			<td>{{ product.productDescription }}</td>
+			<td>{{ product.productName }}</td>
+			<td>{{ product.productUId }}</td>
+			<td>
+				<app-edit-product
+					[(product)]="products[i]"
+				></app-edit-product>
+			</td>
+			<td>
+				<button class="btn btn-outline-danger">
+					<i class="bi bi-trash"></i>
+				</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

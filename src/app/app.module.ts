@@ -5,8 +5,9 @@ import { RouterOutlet } from '@angular/router';
 import { TableModule } from './Components/table/table.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { apiAuthenticationInterceptor } from './Interceptors/api-authentication.interceptor';
+import { EditProductComponent } from './Components/modal/edit-product/edit-product.component';
 @NgModule({
-  imports: [BrowserModule, TableModule, RouterOutlet, HttpClientModule],
+	imports: [BrowserModule, TableModule, RouterOutlet, HttpClientModule, EditProductComponent,],
   declarations: [ AppComponent],
   exports:      [  ],
   providers:[
