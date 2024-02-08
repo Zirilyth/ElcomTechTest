@@ -100,7 +100,7 @@ export class EditProductComponent implements OnInit {
 	onSubmit(e: MouseEvent) {
 		let product:Product = {
 			available: !!this.productForm.value.available,
-			cartonQty:  +!this.productForm.value.cartonQty,
+			cartonQty:  +this.productForm.value.cartonQty!,
 			manufactureCode: this.productForm.value.manufactureCode!,
 			manufactureDescription: this.productForm.value.manufactureDescription!,
 			manufactureName: this.productForm.value.manufactureName!,
