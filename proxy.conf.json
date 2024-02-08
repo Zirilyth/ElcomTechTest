@@ -1,6 +1,6 @@
 {
-	"/api": {
-		"target": "https://test.evolve-s2p.com/CRUDExample",
+	"/CRUDExample": {
+		"target": "https://test.evolve-s2p.com",
 		"secure": true,
 		"changeOrigin": true
 	}

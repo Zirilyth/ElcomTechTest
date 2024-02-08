@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendServiceService } from '../../Services/backend-service.service';
+import { BackendService, Product } from '../../Services/backend.service';
 
 @Component({
   selector: 'app-table',
@@ -7,16 +7,21 @@ import { BackendServiceService } from '../../Services/backend-service.service';
   styleUrl: './table.component.css'
 })
 export class TableComponent implements OnInit{
+	products: Product[] = []
 
 
-    constructor(private backendService:BackendServiceService) {
+    constructor(private backendService:BackendService) {
     }
     ngOnInit(): void {
-      this.backendService.getProducts().subscribe((r) => {
-        console.log(r)
+      this.backendService.getProducts().subscribe((products:Product[]) => {
+        console.log(products)
+		  this.products = products
       })
     }
 
+	trackProductBy(index: any, item: Product){
+		return item.productUId
+	}
 
 
 
