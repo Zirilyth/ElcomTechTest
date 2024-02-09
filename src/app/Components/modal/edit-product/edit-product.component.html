@@ -62,8 +62,19 @@
 	</div>
 </ng-template>
 
+@switch (existingProduct){
+	@case (true){
+		<button (click)="open(content)" name="Row Edit Button" aria-label="Row Edit Button" class="btn btn-outline-primary">
+			<i class="bi bi-pencil-fill bi-"></i>
+		</button>
+	}
+	@case(false){
+		<button (click)="open(content)" name="New Product Button" aria-label="New Product Button" class="btn btn-outline-primary">
+			<i class="bi bi-plus-lg"></i>
+			New Product
+		</button>
+	}
+}
 
-<button (click)="open(content)" name="Row Edit Button" aria-label="Row Edit Button" class="btn btn-outline-primary">
-	<i class="bi bi-pencil-fill bi-"></i>
-</button>
+
 

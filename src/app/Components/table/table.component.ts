@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService, Product } from '../../Services/backend.service';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-table',
@@ -8,6 +9,7 @@ import { BackendService, Product } from '../../Services/backend.service';
 })
 export class TableComponent implements OnInit {
 	products: Product[] = [];
+
 
 
 	constructor(private backendService: BackendService) {
@@ -24,4 +26,7 @@ export class TableComponent implements OnInit {
 	}
 
 
+	productAdded(product:Product) {
+		this.products.push(product)
+	}
 }

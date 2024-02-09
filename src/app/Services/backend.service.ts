@@ -17,6 +17,11 @@ export class BackendService {
 		);
 	}
 
+	public addProduct(product:Product) {
+		return this.http.post('/CRUDExample/add-product',{...product}).pipe(
+			catchError(this.handleAPIError('Add Product'))
+		)
+	}
 
 	public getProducts() {
 		return this.http.get<Product[]>('/CRUDExample/get-products').pipe(
