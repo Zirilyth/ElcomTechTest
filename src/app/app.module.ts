@@ -6,13 +6,17 @@ import { TableModule } from './Components/table/table.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { apiAuthenticationInterceptor } from './Interceptors/api-authentication.interceptor';
 import { EditProductComponent } from './Components/modal/edit-product/edit-product.component';
+import { loadingInterceptor } from './Interceptors/loading.interceptor';
+import { LoadingSpinnerComponent } from './Components/loading-spinner/loading-spinner.component';
 
 @NgModule({
-	imports: [BrowserModule, TableModule, RouterOutlet, HttpClientModule, EditProductComponent,],
+	imports: [BrowserModule, TableModule, RouterOutlet, HttpClientModule, EditProductComponent, LoadingSpinnerComponent,],
 	declarations: [AppComponent],
 	exports: [],
 	providers: [
-		{provide: HTTP_INTERCEPTORS, useClass: apiAuthenticationInterceptor, multi: true}],
+		{provide: HTTP_INTERCEPTORS, useClass: apiAuthenticationInterceptor, multi: true},
+		{provide: HTTP_INTERCEPTORS, useClass: loadingInterceptor, multi: true}],
+
 	bootstrap: [AppComponent]
 })
 export class AppModule {
