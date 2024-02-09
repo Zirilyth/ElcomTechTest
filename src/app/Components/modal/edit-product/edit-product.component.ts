@@ -18,7 +18,11 @@ import { Subject } from 'rxjs';
 export class EditProductComponent implements OnInit {
 
 	@Input() product: Product;
+
 	@Output() productChange = new Subject<Product>();
+
+	@Input() existingProduct:boolean = false;
+
 	productForm = this.formBuilder.group({
 			productCode: ['', Validators.compose([
 					Validators.required,
@@ -55,11 +59,10 @@ export class EditProductComponent implements OnInit {
 					Validators.pattern('^[0-9]+$')
 				]
 			)],
-			available: ['', Validators.compose([
-				Validators.required],
-			)]
+			available: ['']
 		}
 	);
+
 	private modalService = inject(NgbModal);
 
 	constructor(
@@ -112,7 +115,7 @@ export class EditProductComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		if (this.product !== undefined) {
+		if (this.product !== undefined && this.existingProduct) {
 			this.productForm.patchValue({
 				productCode: this.product.productCode,
 				productName: this.product.productName,
@@ -138,10 +141,21 @@ export class EditProductComponent implements OnInit {
 			productName: this.productForm.value.productName!,
 			productUId: this.product?.productUId!
 		};
-		this.backendService.editProduct(product).subscribe((response) => {
-			this.productChange.next(product);
-			this.modalService.dismissAll();
-		});
+
+
+		if(this.existingProduct){
+			this.backendService.editProduct(product).subscribe((response) => {
+				this.productChange.next(product);
+				this.modalService.dismissAll();
+			});
+		}else{
+			this.backendService.addProduct(product).subscribe((response) =>{
+				this.productChange.next(product)
+				this.modalService.dismissAll();
+
+			})
+		}
+
 	}
 
 	open(content: TemplateRef<any>) {

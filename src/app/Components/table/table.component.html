@@ -1,4 +1,8 @@
 <div class="card p-4 m-5 rounded-5 shadow-lg">
+	<app-edit-product
+		(productChange)="productAdded($event)"
+	></app-edit-product>
+
 	<table class="table table-striped">
 		<thead>
 		<th scope="col">Available</th>
@@ -9,7 +13,6 @@
 		<th scope="col">Product Code</th>
 		<th scope="col">Product Description</th>
 		<th scope="col">Product Name</th>
-		<th scope="col">Product UID</th>
 		<th scope="col"></th>
 		</thead>
 		<tbody>
@@ -22,10 +25,10 @@
 			<td>{{ product.productCode }}</td>
 			<td>{{ product.productDescription }}</td>
 			<td>{{ product.productName }}</td>
-			<td>{{ product.productUId }}</td>
 			<td>
 				<app-edit-product
 					[(product)]="products[i]"
+					[existingProduct] = true
 				></app-edit-product>
 			</td>
 			<td>
