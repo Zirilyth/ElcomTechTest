@@ -1,0 +1,19 @@
+<div class="toast-container position-fixed top-0 end-0 p-3', style: 'z-index: 1200">
+
+	@for (toast of toastService.toasts; track toast) {
+		<ngb-toast
+			[class]="toast.classname"
+			[autohide]="true"
+			[delay]="toast.delay || 5000"
+			(hidden)="toastService.remove(toast)"
+		>
+			<div class="d-flex flex-row" >
+				<h5 class="flex-grow-1">{{ toast.title }}</h5>
+				<button (click)="toastService.remove(toast)" class="flex-grow-0 btn btn-outline-light">
+					<i class="bi bi-x-lg"></i>
+				</button>
+			</div>
+				<p class="flex-grow-1">{{ toast.message }}</p>
+		</ngb-toast>
+	}
+</div>
