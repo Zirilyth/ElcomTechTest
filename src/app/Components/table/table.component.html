@@ -1,30 +1,33 @@
-<div class="card p-4 m-5 rounded-5 shadow-lg">
+<div class="card p-4 m-5 rounded-5 shadow-lg table-responsive-lg">
 	<app-edit-product
 		(productChange)="productAdded($event)"
 	></app-edit-product>
 
-	<table class="table table-striped">
+	<table class="table">
 		<thead>
-		<th scope="col">Available</th>
-		<th scope="col">Carton Quantity</th>
-		<th scope="col">Manufacture Code</th>
-		<th scope="col">Manufacture Description</th>
+		<th scope="col">Product Name</th>
 		<th scope="col">Manufacture Name</th>
 		<th scope="col">Product Code</th>
+		<th scope="col">Manufacture Code</th>
 		<th scope="col">Product Description</th>
-		<th scope="col">Product Name</th>
+		<th scope="col">Manufacture Description</th>
+		<th scope="col">Carton Quantity</th>
+		<th scope="col">Available</th>
 		<th scope="col"></th>
 		</thead>
 		<tbody>
-		<tr *ngFor="let product of products; index as i; trackBy: trackProductBy">
-			<td>{{ product.available }}</td>
-			<td>{{ product.cartonQty }}</td>
-			<td>{{ product.manufactureCode }}</td>
-			<td>{{ product.manufactureDescription }}</td>
+		<tr
+			*ngFor="let product of products; index as i; trackBy: trackProductBy"
+			[ngClass]="[product.available ? '' : 'table-danger']"
+		>
+			<td>{{ product.productName }}</td>
 			<td>{{ product.manufactureName }}</td>
 			<td>{{ product.productCode }}</td>
+			<td>{{ product.manufactureCode }}</td>
 			<td>{{ product.productDescription }}</td>
-			<td>{{ product.productName }}</td>
+			<td>{{ product.manufactureDescription }}</td>
+			<td>{{ product.cartonQty }}</td>
+			<td >{{ product.available }}</td>
 			<td>
 				<app-edit-product
 					[(product)]="products[i]"
