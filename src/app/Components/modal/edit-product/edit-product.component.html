@@ -54,9 +54,11 @@
 			</div>
 			<br>
 
-			<button [disabled]="!productForm.valid"
-					[ngClass]="{'btn-danger': !productForm?.valid,'btn-primary':productForm?.valid}"
-					class="btn" type="submit">Submit
+			<button
+				title="Submit Product"
+				[disabled]="!productForm.valid"
+				[ngClass]="{'btn-danger': !productForm?.valid,'btn-primary':productForm?.valid}"
+				class="btn" type="submit">Submit
 			</button>
 		</form>
 	</div>
@@ -65,7 +67,7 @@
 @switch (existingProduct){
 	@case (true){
 		<button (click)="open(content)" name="Row Edit Button" aria-label="Row Edit Button" class="btn btn-outline-primary">
-			<i class="bi bi-pencil-fill bi-"></i>
+			<i class="bi bi-pencil-fill"></i>
 		</button>
 	}
 	@case(false){

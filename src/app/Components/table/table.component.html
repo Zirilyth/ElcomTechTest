@@ -1,45 +1,53 @@
-<div class="card p-4 m-5 rounded-5 shadow-lg table-responsive-lg">
+<div class="card p-4 m-5 rounded-5 shadow-lg">
 	<app-edit-product
 		(productChange)="productAdded($event)"
 	></app-edit-product>
-
-	<table class="table">
-		<thead>
-		<th scope="col">Product Name</th>
-		<th scope="col">Manufacture Name</th>
-		<th scope="col">Product Code</th>
-		<th scope="col">Manufacture Code</th>
-		<th scope="col">Product Description</th>
-		<th scope="col">Manufacture Description</th>
-		<th scope="col">Carton Quantity</th>
-		<th scope="col">Available</th>
-		<th scope="col"></th>
-		</thead>
-		<tbody>
-		<tr
-			*ngFor="let product of products; index as i; trackBy: trackProductBy"
-			[ngClass]="[product.available ? '' : 'table-danger']"
-		>
-			<td>{{ product.productName }}</td>
-			<td>{{ product.manufactureName }}</td>
-			<td>{{ product.productCode }}</td>
-			<td>{{ product.manufactureCode }}</td>
-			<td>{{ product.productDescription }}</td>
-			<td>{{ product.manufactureDescription }}</td>
-			<td>{{ product.cartonQty }}</td>
-			<td >{{ product.available }}</td>
-			<td>
-				<app-edit-product
-					[(product)]="products[i]"
-					[existingProduct] = true
-				></app-edit-product>
-			</td>
-			<td>
-				<button class="btn btn-outline-danger" aria-label="Row Delete Button" name="Delete Button">
-					<i class="bi bi-trash" ></i>
-				</button>
-			</td>
-		</tr>
-		</tbody>
-	</table>
+	<div class="table-responsive-lg">
+		<table class="table">
+			<thead>
+			<th scope="col">Product Name</th>
+			<th scope="col">Manufacture Name</th>
+			<th scope="col">Product Code</th>
+			<th scope="col">Manufacture Code</th>
+			<th scope="col">Product Description</th>
+			<th scope="col">Manufacture Description</th>
+			<th scope="col">Carton Quantity</th>
+			<th scope="col">Available</th>
+			<th scope="col"></th>
+			</thead>
+			<tbody>
+			<tr
+				*ngFor="let product of products; index as i; trackBy: trackProductBy"
+				[ngClass]="[product.available ? '' : 'table-danger']"
+			>
+				<td>{{ product.productName }}</td>
+				<td>{{ product.manufactureName }}</td>
+				<td>{{ product.productCode }}</td>
+				<td>{{ product.manufactureCode }}</td>
+				<td>{{ product.productDescription }}</td>
+				<td>{{ product.manufactureDescription }}</td>
+				<td>{{ product.cartonQty }}</td>
+				<td>
+					@if (product.available) {
+						<i class="bi bi-check-lg"></i>
+					} @else {
+						<i class="bi bi-slash-circle"></i>
+					}
+				</td>
+				<td>
+					<app-edit-product
+						[(product)]="products[i]"
+						[existingProduct]=true
+					></app-edit-product>
+				</td>
+				<td>
+					<app-delete-product
+						[productID]="product.productUId"
+						(productIDChange)="deleteProduct($event)"
+					></app-delete-product>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
