@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService, Product } from '../../Services/backend.service';
-import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-table',
@@ -9,7 +8,6 @@ import { Subject } from 'rxjs';
 })
 export class TableComponent implements OnInit {
 	products: Product[] = [];
-
 
 
 	constructor(private backendService: BackendService) {
@@ -26,7 +24,15 @@ export class TableComponent implements OnInit {
 	}
 
 
-	productAdded(product:Product) {
-		this.products.push(product)
+	productAdded(product: Product) {
+		this.products.push(product);
 	}
+
+	deleteProduct($event: number) {
+		let deletedProduct = this.products.find((product) => product.productUId === $event);
+		if (deletedProduct) {
+			this.products.splice(this.products.indexOf(deletedProduct),1);
+		}
+	}
+
 }

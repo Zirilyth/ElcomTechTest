@@ -70,7 +70,7 @@ export class EditProductComponent implements OnInit {
 		private backendService: BackendService
 	) {
 		this.product = {
-			productUId: '',
+			productUId: 0,
 			available: false,
 			cartonQty: 0,
 			manufactureCode: '',

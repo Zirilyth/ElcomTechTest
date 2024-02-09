@@ -61,7 +61,7 @@ export class BackendService {
 
 
 export interface Product {
-	productUId: string,
+	productUId: number,
 	productCode: string,
 	productName: string,
 	productDescription: string,
