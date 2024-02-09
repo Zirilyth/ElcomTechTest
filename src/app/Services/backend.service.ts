@@ -11,6 +11,12 @@ export class BackendService {
 	constructor(private http: HttpClient) {
 	}
 
+	public createProduct(product:Product) {
+		return this.http.post('/CRUDExample/create-product',{...product}).pipe(
+			catchError(this.handleAPIError<Product[]>('Create Product'))
+		);
+	}
+
 
 	public getProducts() {
 		return this.http.get<Product[]>('/CRUDExample/get-products').pipe(

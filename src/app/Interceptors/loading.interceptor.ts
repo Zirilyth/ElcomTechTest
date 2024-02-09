@@ -7,8 +7,9 @@ import { inject, Injectable } from '@angular/core';
 export class loadingInterceptor implements HttpInterceptor {
 
 	private _loadingService = inject(LoadingService);
+
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		this._loadingService.show()
+		this._loadingService.show();
 		return next.handle(req).pipe(
 			finalize(() => this._loadingService.hide())
 		);
