@@ -1,15 +1,14 @@
 import { Component, inject, Input, Output, TemplateRef } from '@angular/core';
 import { BackendService, Product } from '../../../Services/backend.service';
 import { Subject } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-add-product',
-  standalone: true,
-  imports: [],
-  templateUrl: './add-product.component.html',
-  styleUrl: './add-product.component.css'
+	selector: 'app-add-product',
+	standalone: true,
+	imports: [],
+	templateUrl: './add-product.component.html',
+	styleUrl: './add-product.component.css'
 })
 export class AddProductComponent {
 	@Input() product: Product;
@@ -37,7 +36,7 @@ export class AddProductComponent {
 		this.modalService.open(content, {ariaLabelledBy: 'delete-product-modal'});
 	}
 
-	onSubmit(e:MouseEvent){
+	onSubmit(e: MouseEvent) {
 
 	}
 }
