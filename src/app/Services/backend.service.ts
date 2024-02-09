@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ToastService } from './toast.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -8,7 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class BackendService {
 
 
-	constructor(private http: HttpClient) {
+	constructor(
+		private http: HttpClient,
+		private toastService:ToastService,
+	) {
 	}
 
 	public createProduct(product:Product) {
@@ -24,7 +28,7 @@ export class BackendService {
 	}
 
 	public getProducts() {
-		return this.http.get<Product[]>('/CRUDExample/get-products').pipe(
+		return this.http.get<Product[]>('/CRUDExample/gt-products').pipe(
 			catchError(this.handleAPIError<Product[]>('Get Products'))
 		);
 	}
@@ -52,7 +56,14 @@ export class BackendService {
 
 
 	private handleAPIError<T>(operation = 'operation', result?: T) {
-		return (error: any): Observable<T> => {
+		return (error: Error): Observable<T> => {
+			this.toastService.show({
+				title:'Error',
+				message:error.message,
+				classname:'bg-danger text-light',
+				delay:10000
+
+			})
 			console.error(operation, ': ', error);
 			return of(result as T);
 		};
