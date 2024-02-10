@@ -1,7 +1,16 @@
 <div class="card p-4 m-lg-3 rounded-5 shadow-lg">
-	<app-edit-product
-		(productChange)="productAdded($event)"
-	></app-edit-product>
+	<div class="d-flex justify-content-between">
+		<app-edit-product
+			(productChange)="productAdded($event)"
+		></app-edit-product>
+		<button
+			class="btn btn-outline-primary ms-1"
+			(click) = "loadItems()"
+		>
+			<i class="bi bi-arrow-clockwise"></i>
+			Refresh
+		</button>
+	</div>
 	<div class="table-responsive-lg">
 		<table class="table">
 			<thead>
@@ -26,7 +35,7 @@
 				<td>{{ product.manufactureCode }}</td>
 				<td>{{ product.productDescription }}</td>
 				<td>{{ product.manufactureDescription }}</td>
-				<td>{{ product.cartonQty }}</td>
+				<td>{{ product.cartonQty | number }}</td>
 				<td>
 					@if (product.available) {
 						<i class="bi bi-check-lg"></i>
@@ -49,5 +58,19 @@
 			</tr>
 			</tbody>
 		</table>
+		<div class="d-flex justify-content-between p-2">
+			<ngb-pagination
+				[collectionSize]="productsSize"
+				[(page)]="currentPage"
+				[pageSize]="pageSize"
+				(pageChange)="loadItems()"
+			>
+			</ngb-pagination>
+			<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadItems()">
+				<option [ngValue]="5">5 items per page</option>
+				<option [ngValue]="10">10 items per page</option>
+				<option [ngValue]="20">20 items per page</option>
+			</select>
+		</div>
 	</div>
 </div>

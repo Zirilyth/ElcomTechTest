@@ -4,6 +4,7 @@ import { BackendService, Product } from '../../../Services/backend.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Subject } from 'rxjs';
+import { ToastService } from '../../../Services/toast.service';
 
 @Component({
 	selector: 'app-edit-product',
@@ -67,7 +68,8 @@ export class EditProductComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private backendService: BackendService
+		private backendService: BackendService,
+		private toastService:ToastService
 	) {
 		this.product = {
 			productUId: 0,
@@ -145,13 +147,24 @@ export class EditProductComponent implements OnInit {
 
 		if(this.existingProduct){
 			this.backendService.editProduct(product).subscribe((response) => {
+
 				this.productChange.next(product);
 				this.modalService.dismissAll();
+				this.toastService.show({
+					title: 'Success!',
+					message: 'Updated Product: ' + product.productName,
+					classname: 'bg-success text-light'
+				});
 			});
 		}else{
 			this.backendService.addProduct(product).subscribe((response) =>{
 				this.productChange.next(product)
 				this.modalService.dismissAll();
+				this.toastService.show({
+					title: 'Success!',
+					message: 'Added Product: ' + product.productName,
+					classname: 'bg-success text-light'
+				});
 
 			})
 		}
@@ -160,7 +173,6 @@ export class EditProductComponent implements OnInit {
 
 	open(content: TemplateRef<any>) {
 		this.modalService.open(content, {ariaLabelledBy: 'edit-product-modal'});
-
 	}
 
 
