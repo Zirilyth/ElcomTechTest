@@ -14,13 +14,6 @@ export class BackendService {
 		private toastService:ToastService,
 	) {
 	}
-
-	public createProduct(product:Product) {
-		return this.http.post('/CRUDExample/create-product',{...product}).pipe(
-			catchError(this.handleAPIError<Product[]>('Create Product'))
-		);
-	}
-
 	public addProduct(product:Product) {
 		return this.http.post('/CRUDExample/add-product',{...product}).pipe(
 			catchError(this.handleAPIError('Add Product'))
@@ -28,13 +21,12 @@ export class BackendService {
 	}
 
 	public getProducts() {
-		return this.http.get<Product[]>('/CRUDExample/gt-products').pipe(
+		return this.http.get<Product[]>('/CRUDExample/get-products').pipe(
 			catchError(this.handleAPIError<Product[]>('Get Products'))
 		);
 	}
 
 	public editProduct(product: Product) {
-		console.log(product);
 		return this.http.put<Product[]>(
 			'/CRUDExample/edit-product',
 			{...product},
