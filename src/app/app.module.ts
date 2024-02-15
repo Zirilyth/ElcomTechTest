@@ -12,14 +12,31 @@ import { ToastContainerComponent } from './Components/toast/toast-container/toas
 import { ToastComponent } from './Components/toast/toast.component';
 
 @NgModule({
-	imports: [BrowserModule, TableModule, RouterOutlet, HttpClientModule, EditProductComponent, LoadingSpinnerComponent, ToastContainerComponent, ToastComponent,],
+	imports: [
+		BrowserModule,
+		TableModule,
+		RouterOutlet,
+		HttpClientModule,
+		EditProductComponent,
+		LoadingSpinnerComponent,
+		ToastContainerComponent,
+		ToastComponent,
+	],
 	declarations: [AppComponent],
 	exports: [],
 	providers: [
-		{provide: HTTP_INTERCEPTORS, useClass: apiAuthenticationInterceptor, multi: true},
-		{provide: HTTP_INTERCEPTORS, useClass: loadingInterceptor, multi: true}],
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: apiAuthenticationInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: loadingInterceptor,
+			multi: true,
+		},
+	],
 
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

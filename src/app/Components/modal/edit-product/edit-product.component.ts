@@ -1,4 +1,11 @@
-import { Component, inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import {
+	Component,
+	inject,
+	Input,
+	OnInit,
+	Output,
+	TemplateRef,
+} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BackendService, Product } from '../../../Services/backend.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -9,67 +16,76 @@ import { ToastService } from '../../../Services/toast.service';
 @Component({
 	selector: 'app-edit-product',
 	standalone: true,
-	imports: [
-		ReactiveFormsModule,
-		NgClass
-	],
+	imports: [ReactiveFormsModule, NgClass],
 	templateUrl: './edit-product.component.html',
-	styleUrl: './edit-product.component.css'
+	styleUrl: './edit-product.component.css',
 })
 export class EditProductComponent implements OnInit {
-
 	@Input() product: Product;
 
 	@Output() productChange = new Subject<Product>();
 
-	@Input() existingProduct:boolean = false;
+	@Input() existingProduct: boolean = false;
 
 	productForm = this.formBuilder.group({
-			productCode: ['', Validators.compose([
-					Validators.required,
-					Validators.maxLength(100),
-				]
-			)],
-			productName: ['', Validators.compose([
-					Validators.required,
-					Validators.maxLength(100),
-				]
-			)],
-			productDescription: ['', Validators.compose([
-					Validators.required,
-					Validators.maxLength(100),
-				]
-			)],
-			manufactureCode: ['', Validators.compose([
-					Validators.required,
-					Validators.maxLength(100),
-				]
-			)],
-			manufactureName: ['', Validators.compose([
-					Validators.required,
-					Validators.maxLength(100),
-				]
-			)],
-			manufactureDescription: ['', Validators.compose([
-					Validators.required,
-					Validators.maxLength(100),
-				]
-			)],
-			cartonQty: ['', Validators.compose([
-					Validators.required,
-					Validators.pattern('^[0-9]+$')
-				]
-			)],
-			available: ['']
-		}
-	);
+		productCode: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.maxLength(100),
+			]),
+		],
+		productName: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.maxLength(100),
+			]),
+		],
+		productDescription: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.maxLength(100),
+			]),
+		],
+		manufactureCode: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.maxLength(100),
+			]),
+		],
+		manufactureName: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.maxLength(100),
+			]),
+		],
+		manufactureDescription: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.maxLength(100),
+			]),
+		],
+		cartonQty: [
+			'',
+			Validators.compose([
+				Validators.required,
+				Validators.pattern('^[0-9]+$'),
+			]),
+		],
+		available: [''],
+	});
 
 	private modalService = inject(NgbModal);
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private backendService: BackendService,
-		private toastService:ToastService
+		private toastService: ToastService,
 	) {
 		this.product = {
 			productUId: 0,
@@ -80,7 +96,7 @@ export class EditProductComponent implements OnInit {
 			manufactureName: '',
 			productCode: '',
 			productDescription: '',
-			productName: ''
+			productName: '',
 		};
 	}
 
@@ -131,49 +147,46 @@ export class EditProductComponent implements OnInit {
 		}
 	}
 
-	onSubmit(e: MouseEvent) {
-		let product: Product = {
+	onSubmit() {
+		const product: Product = {
 			available: !!this.productForm.value.available,
 			cartonQty: +this.productForm.value.cartonQty!,
 			manufactureCode: this.productForm.value.manufactureCode!,
-			manufactureDescription: this.productForm.value.manufactureDescription!,
+			manufactureDescription:
+				this.productForm.value.manufactureDescription!,
 			manufactureName: this.productForm.value.manufactureName!,
 			productCode: this.productForm.value.productCode!,
 			productDescription: this.productForm.value.productDescription!,
 			productName: this.productForm.value.productName!,
-			productUId: this.product?.productUId!
+			productUId: this.product?.productUId,
 		};
 
-
-		if(this.existingProduct){
-			this.backendService.editProduct(product).subscribe((response) => {
-
+		if (this.existingProduct) {
+			this.backendService.editProduct(product).subscribe(() => {
 				this.productChange.next(product);
 				this.modalService.dismissAll();
 				this.toastService.show({
 					title: 'Success!',
 					message: 'Updated Product: ' + product.productName,
-					classname: 'bg-success text-light'
+					classname: 'bg-success text-light',
 				});
 			});
-		}else{
-			this.backendService.addProduct(product).subscribe((response) =>{
-				this.productChange.next(product)
+		} else {
+			this.backendService.addProduct(product).subscribe(() => {
+				this.productChange.next(product);
 				this.modalService.dismissAll();
 				this.toastService.show({
 					title: 'Success!',
 					message: 'Added Product: ' + product.productName,
-					classname: 'bg-success text-light'
+					classname: 'bg-success text-light',
 				});
-
-			})
+			});
 		}
-
 	}
 
-	open(content: TemplateRef<any>) {
-		this.modalService.open(content, {ariaLabelledBy: 'edit-product-modal'});
+	open(content: TemplateRef<unknown>) {
+		this.modalService.open(content, {
+			ariaLabelledBy: 'edit-product-modal',
+		});
 	}
-
-
 }

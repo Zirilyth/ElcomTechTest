@@ -6,7 +6,7 @@ import { map, tap } from 'rxjs';
 @Component({
 	selector: 'app-table',
 	templateUrl: './table.component.html',
-	styleUrl: './table.component.css'
+	styleUrl: './table.component.css',
 })
 export class TableComponent implements OnInit {
 	products: Product[] = [];
@@ -16,18 +16,16 @@ export class TableComponent implements OnInit {
 
 	constructor(
 		private backendService: BackendService,
-		private toastService: ToastService
-	) {
-	}
+		private toastService: ToastService,
+	) {}
 
 	ngOnInit(): void {
 		this.loadItems();
 	}
 
-	trackProductBy(index: any, item: Product) {
+	trackProductBy(index: number, item: Product) {
 		return item.productUId;
 	}
-
 
 	productAdded(product: Product) {
 		this.products.push(product);
@@ -43,30 +41,33 @@ export class TableComponent implements OnInit {
 	}
 
 	deleteProduct($event: number) {
-		let deletedProduct = this.products.find((product) => product.productUId === $event);
+		const deletedProduct = this.products.find(
+			(product) => product.productUId === $event,
+		);
 		if (deletedProduct) {
 			this.products.splice(this.products.indexOf(deletedProduct), 1);
 			this.toastService.show({
 				title: 'Success!',
 				message: 'Deleted Product: ' + deletedProduct.productName,
-				classname: 'bg-success text-light'
+				classname: 'bg-success text-light',
 			});
 		}
 	}
 
 	loadItems() {
-		this.backendService.getProducts().pipe(
-			tap(val => this.productsSize = val.length),
-			map((products): Product[] => {
-				return products.slice(
-					(this.currentPage - 1) * this.pageSize,
-					(this.currentPage - 1) * this.pageSize + this.pageSize
-				);
-			})
-		).subscribe((products: Product[]) => {
-			this.products = products;
-
-		});
-
+		this.backendService
+			.getProducts()
+			.pipe(
+				tap((val) => (this.productsSize = val.length)),
+				map((products): Product[] => {
+					return products.slice(
+						(this.currentPage - 1) * this.pageSize,
+						(this.currentPage - 1) * this.pageSize + this.pageSize,
+					);
+				}),
+			)
+			.subscribe((products: Product[]) => {
+				this.products = products;
+			});
 	}
 }

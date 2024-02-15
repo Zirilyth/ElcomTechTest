@@ -6,17 +6,12 @@ import { Subject } from 'rxjs';
 @Component({
 	selector: 'app-loading-spinner',
 	standalone: true,
-	imports: [
-		NgIf,
-		AsyncPipe
-	],
+	imports: [NgIf, AsyncPipe],
 	templateUrl: './loading-spinner.component.html',
-	styleUrl: './loading-spinner.component.css'
+	styleUrl: './loading-spinner.component.css',
 })
 export class LoadingSpinnerComponent {
-
 	isVisible: Subject<boolean> = this.loadingService.isLoading;
 
-	constructor(private loadingService: LoadingService) {
-	}
+	constructor(private loadingService: LoadingService) {}
 }

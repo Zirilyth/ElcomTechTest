@@ -4,79 +4,135 @@
 	</div>
 
 	<div class="modal-body">
-		<form (ngSubmit)="onSubmit($event)" [formGroup]="productForm">
+		<form (ngSubmit)="onSubmit()" [formGroup]="productForm">
 			<label for="productCode">Product Code</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !productCode?.valid}" class="form-control"
-					   formControlName="productCode"
-					   id="productCode" name="productCode" type="text">
+				<input
+					[ngClass]="{ 'border-danger': !productCode?.valid }"
+					class="form-control"
+					formControlName="productCode"
+					id="productCode"
+					name="productCode"
+					type="text"
+				/>
 			</div>
 			<label for="productName">Product Name</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !productName?.valid}" class="form-control"
-					   formControlName="productName"
-					   id="productName" name="productName" type="text">
+				<input
+					[ngClass]="{ 'border-danger': !productName?.valid }"
+					class="form-control"
+					formControlName="productName"
+					id="productName"
+					name="productName"
+					type="text"
+				/>
 			</div>
 			<label for="productDescription">Product Description</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !productDescription?.valid}" class="form-control"
-					   formControlName="productDescription"
-					   id="productDescription" name="productDescription" type="text">
+				<input
+					[ngClass]="{ 'border-danger': !productDescription?.valid }"
+					class="form-control"
+					formControlName="productDescription"
+					id="productDescription"
+					name="productDescription"
+					type="text"
+				/>
 			</div>
 			<label for="manufactureCode">Manufacture Code</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !manufactureCode?.valid}" class="form-control"
-					   formControlName="manufactureCode"
-					   id="manufactureCode" name="manufactureCode" type="text">
+				<input
+					[ngClass]="{ 'border-danger': !manufactureCode?.valid }"
+					class="form-control"
+					formControlName="manufactureCode"
+					id="manufactureCode"
+					name="manufactureCode"
+					type="text"
+				/>
 			</div>
 			<label for="manufactureName">Manufacture Name</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !manufactureName?.valid}" class="form-control"
-					   formControlName="manufactureName"
-					   id="manufactureName" name="manufactureName" type="text">
+				<input
+					[ngClass]="{ 'border-danger': !manufactureName?.valid }"
+					class="form-control"
+					formControlName="manufactureName"
+					id="manufactureName"
+					name="manufactureName"
+					type="text"
+				/>
 			</div>
 			<label for="manufactureDescription">Manufacture Description</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !manufactureDescription?.valid}" class="form-control"
-					   formControlName="manufactureDescription" id="manufactureDescription"
-					   name="manufactureDescription"
-					   type="text">
+				<input
+					[ngClass]="{
+						'border-danger': !manufactureDescription?.valid
+					}"
+					class="form-control"
+					formControlName="manufactureDescription"
+					id="manufactureDescription"
+					name="manufactureDescription"
+					type="text"
+				/>
 			</div>
 			<label for="cartonQty">Carton Qty</label>
-			<div class="input-group ">
-				<input [ngClass]="{'border-danger': !cartonQty?.valid}" class="form-control" formControlName="cartonQty"
-					   id="cartonQty" name="cartonQty" type="number">
+			<div class="input-group">
+				<input
+					[ngClass]="{ 'border-danger': !cartonQty?.valid }"
+					class="form-control"
+					formControlName="cartonQty"
+					id="cartonQty"
+					name="cartonQty"
+					type="number"
+				/>
 			</div>
 			<label for="available">Available</label>
 			<div class="input-group">
-				<input [ngClass]="{'border-danger': !available?.valid}" class="form-check" formControlName="available"
-					   id="available" name="available" type="checkbox">
+				<input
+					[ngClass]="{ 'border-danger': !available?.valid }"
+					class="form-check"
+					formControlName="available"
+					id="available"
+					name="available"
+					type="checkbox"
+				/>
 			</div>
-			<br>
+			<br />
 
 			<button
 				title="Submit Product"
-				[disabled]="!productForm.valid"
-				[ngClass]="{'btn-danger': !productForm?.valid,'btn-primary':productForm?.valid}"
-				class="btn" type="submit">Submit
+				[disabled]="productForm.valid"
+				[ngClass]="{
+					'btn-danger': productForm.valid,
+					'btn-primary': productForm.valid
+				}"
+				class="btn"
+				type="submit"
+			>
+				Submit
 			</button>
 		</form>
 	</div>
 </ng-template>
 
-@switch (existingProduct){
-	@case (true){
-		<button (click)="open(content)" name="Row Edit Button" aria-label="Row Edit Button" class="btn btn-outline-primary">
+@switch (existingProduct) {
+	@case (true) {
+		<button
+			(click)="open(content)"
+			name="Row Edit Button"
+			aria-label="Row Edit Button"
+			class="btn btn-outline-primary"
+		>
 			<i class="bi bi-pencil-fill"></i>
 		</button>
 	}
-	@case(false){
-		<button (click)="open(content)" name="New Product Button" aria-label="New Product Button" class="btn btn-outline-primary">
+	@case (false) {
+		<button
+			(click)="open(content)"
+			name="New Product Button"
+			aria-label="New Product Button"
+			class="btn btn-outline-primary"
+		>
 			<i class="bi bi-plus-lg"></i>
 			New Product
 		</button>
 	}
 }
-
-
-

@@ -7,7 +7,6 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
 	declarations: [TableComponent],
 	imports: [
@@ -16,9 +15,8 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 		DeleteProductComponent,
 		PaginationComponent,
 		FormsModule,
-		NgbPagination
+		NgbPagination,
 	],
-	exports: [TableComponent]
+	exports: [TableComponent],
 })
-export class TableModule {
-}
+export class TableModule {}

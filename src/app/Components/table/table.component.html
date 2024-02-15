@@ -3,10 +3,7 @@
 		<app-edit-product
 			(productChange)="productAdded($event)"
 		></app-edit-product>
-		<button
-			class="btn btn-outline-primary ms-1"
-			(click) = "loadItems()"
-		>
+		<button class="btn btn-outline-primary ms-1" (click)="loadItems()">
 			<i class="bi bi-arrow-clockwise"></i>
 			Refresh
 		</button>
@@ -14,63 +11,72 @@
 	<div class="table-responsive-lg">
 		<table class="table">
 			<thead>
-			<th scope="col">Product Name</th>
-			<th scope="col">Manufacture Name</th>
-			<th scope="col">Product Code</th>
-			<th scope="col">Manufacture Code</th>
-			<th scope="col">Product Description</th>
-			<th scope="col">Manufacture Description</th>
-			<th scope="col">Carton Quantity</th>
-			<th scope="col">Available</th>
-			<th scope="col"></th>
+				<th scope="col">Product Name</th>
+				<th scope="col">Manufacture Name</th>
+				<th scope="col">Product Code</th>
+				<th scope="col">Manufacture Code</th>
+				<th scope="col">Product Description</th>
+				<th scope="col">Manufacture Description</th>
+				<th scope="col">Carton Quantity</th>
+				<th scope="col">Available</th>
+				<th scope="col"></th>
 			</thead>
 			<tbody>
-			<tr
-				*ngFor="let product of products; index as i; trackBy: trackProductBy"
-				[ngClass]="[product.available ? '' : 'table-danger']"
-			>
-				<td>{{ product.productName }}</td>
-				<td>{{ product.manufactureName }}</td>
-				<td>{{ product.productCode }}</td>
-				<td>{{ product.manufactureCode }}</td>
-				<td>{{ product.productDescription }}</td>
-				<td>{{ product.manufactureDescription }}</td>
-				<td>{{ product.cartonQty | number }}</td>
-				<td>
-					@if (product.available) {
-						<i class="bi bi-check-lg"></i>
-					} @else {
-						<i class="bi bi-slash-circle"></i>
-					}
-				</td>
-				<td>
-					<app-edit-product
-						[(product)]="products[i]"
-						[existingProduct]=true
-					></app-edit-product>
-				</td>
-				<td>
-					<app-delete-product
-						[productID]="product.productUId"
-						(productIDChange)="deleteProduct($event)"
-					></app-delete-product>
-				</td>
-			</tr>
+				<tr
+					*ngFor="
+						let product of products;
+						index as i;
+						trackBy: trackProductBy
+					"
+					[ngClass]="[product.available ? '' : 'table-danger']"
+				>
+					<td>{{ product.productName }}</td>
+					<td>{{ product.manufactureName }}</td>
+					<td>{{ product.productCode }}</td>
+					<td>{{ product.manufactureCode }}</td>
+					<td>{{ product.productDescription }}</td>
+					<td>{{ product.manufactureDescription }}</td>
+					<td>{{ product.cartonQty | number }}</td>
+					<td>
+						@if (product.available) {
+							<i class="bi bi-check-lg"></i>
+						} @else {
+							<i class="bi bi-slash-circle"></i>
+						}
+					</td>
+					<td>
+						<app-edit-product
+							[(product)]="products[i]"
+							[existingProduct]="true"
+						></app-edit-product>
+					</td>
+					<td>
+						<app-delete-product
+							[productID]="product.productUId"
+							(productIDChange)="deleteProduct($event)"
+						></app-delete-product>
+					</td>
+				</tr>
 			</tbody>
 		</table>
-		<div class="d-flex justify-content-between p-2">
-			<ngb-pagination
-				[collectionSize]="productsSize"
-				[(page)]="currentPage"
-				[pageSize]="pageSize"
-				(pageChange)="loadItems()"
-			>
-			</ngb-pagination>
-			<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadItems()">
-				<option [ngValue]="5">5 items per page</option>
-				<option [ngValue]="10">10 items per page</option>
-				<option [ngValue]="20">20 items per page</option>
-			</select>
-		</div>
+	</div>
+	<div class="d-flex justify-content-between p-2">
+		<ngb-pagination
+			[collectionSize]="productsSize"
+			[(page)]="currentPage"
+			[pageSize]="pageSize"
+			(pageChange)="loadItems()"
+		>
+		</ngb-pagination>
+		<select
+			class="form-select"
+			style="width: auto"
+			[(ngModel)]="pageSize"
+			(ngModelChange)="loadItems()"
+		>
+			<option [ngValue]="5">5 items per page</option>
+			<option [ngValue]="10">10 items per page</option>
+			<option [ngValue]="20">20 items per page</option>
+		</select>
 	</div>
 </div>

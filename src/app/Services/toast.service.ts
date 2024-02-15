@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 export interface Toast {
 	classname?: string;
 	delay?: number;
-	message:string;
-	title:string;
+	message: string;
+	title: string;
 }
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class ToastService {
-
 	toasts: Toast[] = [];
 
 	show(toast: Toast) {
@@ -20,7 +19,7 @@ export class ToastService {
 		this.toasts = this.toasts.filter((t) => t !== toast);
 	}
 
-	clear(){
+	clear() {
 		this.toasts.splice(0, this.toasts.length);
 	}
 }

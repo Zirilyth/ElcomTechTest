@@ -7,10 +7,18 @@
 
 	<div class="modal-body">
 		<div class="d-flex flex-row">
-			<button title="Cancel Delete" (click)="close()" class="m-2 flex-grow-1 btn btn-outline-dark align-items-end">
+			<button
+				title="Cancel Delete"
+				(click)="close()"
+				class="m-2 flex-grow-1 btn btn-outline-dark align-items-end"
+			>
 				Cancel
 			</button>
-			<button title="Confirm Delete" (click)="delete()" class="m-2 flex-grow-1 btn btn-outline-danger">
+			<button
+				title="Confirm Delete"
+				(click)="delete()"
+				class="m-2 flex-grow-1 btn btn-outline-danger"
+			>
 				<i class="bi bi-trash"></i>
 				Delete
 			</button>
@@ -18,6 +26,11 @@
 	</div>
 </ng-template>
 
-<button (click)="open(content)" name="Row Delete Button" aria-label="Row Delete Button" class="btn btn-outline-danger">
+<button
+	(click)="open(content)"
+	name="Row Delete Button"
+	aria-label="Row Delete Button"
+	class="btn btn-outline-danger"
+>
 	<i class="bi bi-trash"></i>
 </button>

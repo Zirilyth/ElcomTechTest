@@ -9,9 +9,8 @@ describe('DeleteProductComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [AppModule]
-		})
-			.compileComponents();
+			imports: [AppModule],
+		}).compileComponents();
 
 		fixture = TestBed.createComponent(DeleteProductComponent);
 		component = fixture.componentInstance;

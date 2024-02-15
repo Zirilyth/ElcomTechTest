@@ -9,9 +9,8 @@ describe('TableComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [AppModule]
-		})
-			.compileComponents();
+			imports: [AppModule],
+		}).compileComponents();
 
 		fixture = TestBed.createComponent(TableComponent);
 		component = fixture.componentInstance;
